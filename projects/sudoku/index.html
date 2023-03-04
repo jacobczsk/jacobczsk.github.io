@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/style/main.css">
+    <script src="https://code.jquery.com/jquery-3.6.3.min.js"
+        integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
+        crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="//unpkg.com/@highlightjs/cdn-assets@11.7.0/styles/default.min.css">
+    <script src="//unpkg.com/@highlightjs/cdn-assets@11.7.0/highlight.min.js"></script>
+    <script src="https://unpkg.com/@popperjs/core@2"></script>
+    <title>JacobCZSK - OpenSudokuSolver</title>
+</head>
+
+<body>
+    <nav class="navbar bg-body-tertiary">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="/">
+                <img src="/img/logo.png" width="100px">
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" aria-current="page" href="/">Home</a>
+                    </li>
+                    <a class="nav-link dropdown-toggle" href="/projects/" id="navbarDropdownMenuLink"
+                        data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Projects
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                        <a class="dropdown-item" href="/projects/">All</a>
+                        <hr class="dropdown-divider">
+                        <a class="dropdown-item" href="/projects/sudoku/">OpenSudokuSolver</a>
+                    </div>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <div id="content">
+        <h1>OpenSudokuSolver</h1>
+        <p>A simple sudoku solver written in Python. Licensed under Apache License. There are some example sudoku in the
+            <code>collection</code> folder (easy, medium, hard, Escargot).
+        </p>
+        <a href="https://github.com/jacobczsk/OpenSudokuSolver">GitHub repo</a>
+        <p></p>
+        <a id="docs"></a>
+        <h2>Documentation</h2>
+        <h3><code>solve(board: list) -&gt; (list, float) | bool</code></h3>
+        <p>The main function. Solves the board (2D list). If it is solvable, then return the board and time it took to
+            solve. If it isn't, then return <code>False</code>.
+        </p>
+        <h3><code>create_board(filename: str) -&gt; list</code></h3>
+        <p>Parse a csv file and return a board</p>
+        <h3><code>find_empty_cell(board: list) -&gt; (int, int) | NoneType</code></h3>
+        <p>Get first empty cell in the board and return it's position. If there isn't any, return None.</p>
+        <h3><code>is_valid(board: list, pos: tuple, num: int) -&gt; bool</code></h3>
+        <p>Check if <code>num</code> can be placed on <code>pos</code>.</p>
+        <a id="examples"></a>
+        <h2>Examples</h2>
+        <pre><code class="language-python">import src.OpenSudokuSolver as oss # import OSS
+from pprint import pprint # import prettyprint
+
+solved, time = oss.solve(oss.create_board("collection/AI_Escargot.osud")) # load Escargot and solve it
+print(f"Solved in {time} ms") # print the time
+pprint(solved) # print the solved board</code></pre>
+        <p>This example uses the <code>create_board</code> function. It loads the sudoku from a file.</p>
+        <pre><code class="language-python">import src.OpenSudokuSolver as oss # import OSS
+from pprint import pprint # import prettyprint
+
+board = [
+    [1, None, None, None, None, 7, None, 9, None],
+    [None, 3, None, None, 2, None, None, None, 8],
+    [None, None, 9, 6, None, None, 5, None, None],
+    [None, None, 5, 3, None, None, 9, None, None],
+    [None, 1, None, None, 8, None, None, None, 2],
+    [6, None, None, None, None, 4, None, None, None],
+    [3, None, None, None, None, None, None, 1, None],
+    [None, 4, None, None, None, None, None, None, 7],
+    [None, None, 7, None, None, None, 3, None, None],
+] # define the board as 2D list
+solved, time = oss.solve(board) # solve
+print(f"Solved in {time} ms") # print the time
+pprint(solved) # print the solved board</code></pre>
+        <p>This example defines the board manually instead of loading it from a file.</p>
+        <script>hljs.highlightAll();</script>
+    </div>
+</body>
+
+</html>
